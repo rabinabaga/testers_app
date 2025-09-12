@@ -8,7 +8,9 @@ export class CreateTargetAppDto {
   name: string;
 
   @IsNotEmpty()
-  @IsUnique('TargetApp', 'link', { message: 'App already submitted' })
+  @IsUnique('TargetApp', 'link', {
+    message: 'App with this link already submitted',
+  })
   link: string;
 
   @IsString()
