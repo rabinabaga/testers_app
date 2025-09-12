@@ -9,6 +9,7 @@ import { CommonModule } from './common/common.module';
 import { Validator } from 'class-validator';
 import { ValidatorsModule } from './validators/validators.module';
 import { MongooseConfigModule } from './mongoose.module';
+import { TargetAppModule } from './target-app/target-app.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { MongooseConfigModule } from './mongoose.module';
     UserModule,
     CommonModule,
     ValidatorsModule,
+    TargetAppModule,
   ],
   controllers: [AppController],
   providers: [AppService],

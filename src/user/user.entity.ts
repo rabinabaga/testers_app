@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { getFormattedDate } from 'src/common/helpers/data_format.helper';
+import { TargetApp } from 'src/target-app/entities/target-app.entity';
 
 @Schema({ timestamps: true })
 export class User extends Document {
@@ -24,20 +25,21 @@ export class User extends Document {
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
-UserSchema.virtual('projects', {
-  ref: 'Project',
+UserSchema.virtual('targetApps', {
+  ref: TargetApp.name,
   localField: '_id',
-  foreignField: 'createdBy',
+  foreignField: 'submittedBy',
 });
 
 UserSchema.set('toJSON', {
   virtuals: true,
   versionKey: false,
-  transform: (doc, ret) => {
+  transform: (doc, ret: any) => {
     delete ret.password;
     ((ret.id = ret._id), delete ret._id);
     return {
       object: 'user',
+      targetApps: ret.targetApps,
       ...ret,
     };
   },
