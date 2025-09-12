@@ -1,7 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { getFormattedDate } from 'src/common/helpers/data_format.helper';
 
-@Schema()
+@Schema({ timestamps: true })
 export class User extends Document {
   @Prop({ required: true, unique: true })
   username: string;
@@ -9,7 +10,7 @@ export class User extends Document {
   @Prop({ required: true, unique: true })
   name: string;
 
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true })
   password: string;
 
   @Prop({ required: true, unique: true })
@@ -18,8 +19,26 @@ export class User extends Document {
   @Prop({ required: true, enum: ['TESTER', 'DEVELOPER'] })
   role: string;
 
-  @Prop({ default: Date.now })
-  createdAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
+UserSchema.virtual('projects', {
+  ref: 'Project',
+  localField: '_id',
+  foreignField: 'createdBy',
+});
+
+UserSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: (doc, ret) => {
+    delete ret.password;
+    ((ret.id = ret._id), delete ret._id);
+    return {
+      object: 'user',
+      ...ret,
+    };
+  },
+});
