@@ -3,7 +3,7 @@ import { User, UserSchema } from './user/user.entity';
 import { Module } from '@nestjs/common';
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost:27017/pilot_tester')],
+  imports: [MongooseModule.forRoot('process.env.DATABASE_URL')],
   exports: [MongooseModule], // Export so other modules can use it
 })
 export class MongooseConfigModule {}
