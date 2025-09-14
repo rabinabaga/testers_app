@@ -14,7 +14,7 @@ async function bootstrap() {
     new TransformInterceptor(),
     new CustomInterceptor(),
   );
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('api/v1');
   app.enableCors({
     origin: '*', // or restrict to frontend IP later
     credentials: true, // Required for cookies to work
