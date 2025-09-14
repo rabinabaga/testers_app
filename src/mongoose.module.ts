@@ -11,9 +11,6 @@ import { MongooseModule } from '@nestjs/mongoose';
         // Get the database URL from environment variables via configService
         const databaseUrl = configService.get<string>('DATABASE_URL');
 
-        console.log('DATABASE_URL from configService:', databaseUrl);
-        console.log('DATABASE_URL from process.env:', process.env.DATABASE_URL);
-
         if (!databaseUrl) {
           throw new Error(
             'DATABASE_URL is not defined in environment variables',

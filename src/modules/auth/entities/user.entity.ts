@@ -1,7 +1,8 @@
+export class Auth {}
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { getFormattedDate } from 'src/common/helpers/data_format.helper';
-import { TargetApp } from 'src/target-app/entities/target-app.entity';
+import { TargetApp } from 'src/modules/target-app/entities/target-app.entity';
 
 @Schema({ timestamps: true })
 export class User extends Document {

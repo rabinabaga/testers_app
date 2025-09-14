@@ -1,7 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
-import { getFormattedDate } from 'src/common/helpers/data_format.helper';
-import { User } from 'src/user/user.entity';
 
 @Schema({ timestamps: true })
 export class TargetApp extends Document {

@@ -1,12 +1,12 @@
 import { InjectModel } from '@nestjs/mongoose';
-import { CreateUserDto } from './dto/create-user.dto';
-import { User } from 'src/user/user.entity';
 import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
+import { CreateUserDto } from './dto/create-user.dto';
+import { User } from './entities/user.entity';
 @Injectable()
 export class UserRepository {
   constructor(
-    @InjectModel(User.name) private readonly userModel: Model<User>,
+    @InjectModel(UserRepository.name) private readonly userModel: Model<User>,
   ) {}
 
   createUser(createUserDto: CreateUserDto): Promise<User> {
